@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:taskmanager/core/Helpers/EnumHelper.dart';
+import 'package:taskmanager/core/models/Enums.dart';
 import 'package:taskmanager/core/models/Task.dart';
 import 'package:taskmanager/core/viewmodels/homemodel.dart';
-import 'package:taskmanager/ui/shared/AppColors.dart';
 import 'package:taskmanager/ui/shared/UIHelpers.dart';
-import 'package:kiwi/kiwi.dart' as kiwi;
-import 'package:taskmanager/ui/widgets/taskitem.dart';
-
+import 'package:taskmanager/ui/widgets/HomeScreenWidgets/tasklist.dart';
 import 'baseview.dart';
 
 class HomeView extends StatelessWidget {
@@ -18,24 +16,43 @@ class HomeView extends StatelessWidget {
       Task("Harsha"),
       Task("Harsha"),
       Task("Harsha"),
+      Task("Harsha"),
+      Task("Harsha"),
+      Task("Harsha"),
+      Task("Harsha"),
+      Task("Harsha"),
+      Task("Harsha"),
       Task("Harsha")
     ];
-    return ChangeNotifierProvider<HomeModel>(
-      builder: (context) => kiwi.Container().resolve<HomeModel>(),
-      child: BaseView<HomeModel>(
-          onModelReady: (model) {},
-          builder: (context, model, child) => SafeArea(
-                  child: Scaffold(
-                appBar: AppBar(
-                  title: Text(UIHelper.AppTitle),
-                  backgroundColor: PrimaryColor,
-                ),
-                body: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (BuildContext buildContext, int index) =>
-                      TaskItem(details[index]),
-                ),
-              ))),
+    return BaseView<HomeModel>(
+      onModelReady: (model) {},
+      builder: (context, model, child) => SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(UIHelper.AppTitle),
+          ),
+          body: GenricList<Task>(details),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              Navigator.pushNamed(context, 'add_task');
+            },
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.av_timer),
+                  title: Text(GetNameOfEnum(TaskStatus.New))),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.assignment_late),
+                  title: Text(GetNameOfEnum(TaskStatus.InProgress))),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.assignment_turned_in),
+                  title: Text(GetNameOfEnum(TaskStatus.Completed)))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,0 +1,26 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "This time complete",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "json:server": "json-server --watch lib/data/tasksdb.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshavardhangangineni/TaskManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harshavardhangangineni/TaskManager/issues"
+  },
+  "homepage": "https://github.com/harshavardhangangineni/TaskManager#readme",
+  "dependencies": {
+    "json-server": "^0.15.0"
+  }
+}

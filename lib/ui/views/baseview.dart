@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
+import 'package:taskmanager/core/viewmodels/basemodel.dart';
 
-class BaseView<T extends ChangeNotifier> extends StatefulWidget {
-  final Widget Function(BuildContext context, T value, Widget child) builder;
+class BaseView<T extends BaseModel> extends StatefulWidget {
+  final Widget Function(BuildContext context, T model, Widget child) builder;
   final Function(T) onModelReady;
-  BaseView({@required this.builder, this.onModelReady});
+
+  BaseView({this.builder, this.onModelReady});
+
   @override
-  _BaseViewState createState() => _BaseViewState();
+  _BaseViewState<T> createState() => _BaseViewState<T>();
 }
 
-class _BaseViewState<T extends ChangeNotifier> extends State<BaseView<T>> {
+class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
+  // T model = locator<T>();
   T model = kiwi.Container().resolve<T>();
-
   @override
   void initState() {
     if (widget.onModelReady != null) {
@@ -24,10 +27,7 @@ class _BaseViewState<T extends ChangeNotifier> extends State<BaseView<T>> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
-      builder: (context) => kiwi.Container().resolve<T>(),
-      child: Consumer<T>(
-        builder: widget.builder,
-      ),
-    );
+        builder: (context) => model,
+        child: Consumer<T>(builder: widget.builder));
   }
 }
