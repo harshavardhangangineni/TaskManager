@@ -4,7 +4,7 @@ import 'package:taskmanager/core/models/Task.dart';
 
 class AddorEditForm extends StatefulWidget {
   Task task;
-  AddorEditForm(@required this.task);
+  AddorEditForm();
   _AddorEditFormState createState() => _AddorEditFormState();
 }
 
@@ -64,7 +64,9 @@ class _AddorEditFormState extends State<AddorEditForm> {
                 );
               }).toList(),
               onChanged: (String newValue) {
-                selectedStatus = newValue;
+                setState(() {
+                  selectedStatus = newValue;
+                });
               },
               value: selectedStatus,
             ),

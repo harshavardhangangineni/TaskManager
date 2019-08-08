@@ -12,26 +12,16 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var details = [
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha"),
-      Task("Harsha")
-    ];
     return BaseView<HomeModel>(
-      onModelReady: (model) {},
+      onModelReady: (model) {
+        model.getTasks();
+      },
       builder: (context, model, child) => SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: Text(UIHelper.AppTitle),
           ),
-          body: GenricList<Task>(details),
+          body: GenricList<Task>(model.taskList, model.state),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () {

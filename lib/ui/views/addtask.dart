@@ -31,7 +31,7 @@ class _AddTaskViewState extends State<AddTaskView> {
               ),
               Divider(),
               Expanded(
-                child: AddorEditForm(Task("asdfas")),
+                child: AddorEditForm(),
               )
             ],
           ),

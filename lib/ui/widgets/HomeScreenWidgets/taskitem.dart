@@ -9,8 +9,8 @@ class TaskItem extends StatelessWidget {
     return Column(
       children: <Widget>[
         ListTile(
-          title: Text(item.name),
-          subtitle: Text(item.name),
+          title: Text(item.Title),
+          subtitle: Text(item.SubTitle),
         ),
         Divider()
       ],
